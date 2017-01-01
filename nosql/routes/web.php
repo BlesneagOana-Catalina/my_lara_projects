@@ -12,5 +12,20 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	phpinfo();
+	 
+
+
+//$manager = new MongoDB\Driver\Manager("mongodb://localhost");
+//$collection = new MongoDB\Collection($manager, "logs","capped_logs");
+	
+    //return new Martinpham\Mongodb\Connection($config);
+	//$manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+//	var_dump($manager);
+	  
+
+	
+	
+	 
+	
 });
