@@ -28,29 +28,38 @@
 	
 	}
 	label{
-		color: navy;
+		color: #FFFF99;
+		//lightyellow
 		font:family: Arial;
 		font-size: 1.2vw;
 	}
-	.w3-light-blue{
+	.w3-red{
 		font:family: Arial;
 		font-size: 1.0vw;
 		font-weight: bold;
+		border-style: solid;
+		border-color: crimson;
+			
 	}
 	</style>
 		<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
         <title>User Add Form</title>
     </head>
     <body>
-	<div class="col-sm-8 col-sm-offset-1 w3-container w3-light-blue">
+	<div class="col-sm-8 col-sm-offset-1 w3-container w3-red">
 	{{Form::open(array('route' => 'post_user'))}}
 	{{ Form::token()}}
-	{{$msg}}
+	<div class="row">
+	<div class="col-md-7 col-md-offset-4">
+	<h3>{{$msg}}</h3>
+	</div>
+	</div>
+	<br>
 	<br>
 	<!--I use my Application Service Provider directive-->
 	<div class="row">
-	<div class="col-md-3">
-	@label("Nume:")
+	<div class="col-md-3 col-md-offset-1">
+	@label("nume:")
 	</div>
 	<div class="col-md-7">
 	@input("name")
@@ -59,8 +68,8 @@
 	<br>
 	
 	<div class="row">
-	<div class="col-md-3">
-	@label("Email:")
+	<div class="col-md-3 col-md-offset-1">
+	@label("email:")
 	</div>
 	<div class="col-md-7">
 	@email("email")
@@ -69,8 +78,8 @@
 	<br>
 	
     <div class="row">
-	<div class="col-md-3">
-	@label("Adress:")
+	<div class="col-md-3 col-md-offset-1">
+	@label("adress:")
 	</div>
 	<div class="col-md-7">
 	@textarea("adress")
@@ -79,8 +88,8 @@
 	<br>
 	
 	<div class="row">
-	<div class="col-md-3">
-	@label("Photo:")
+	<div class="col-md-3 col-md-offset-1">
+	@label("photo:")
 	</div>
 	<div class="col-md-7">
 	@file("photo")
@@ -89,8 +98,8 @@
 	<br>
 
 	<div class="row">
-	<div class="col-md-3">
-	@label("Age:")
+	<div class="col-md-3 col-md-offset-1">
+	@label("age:")
 	</div>
 	<div class="col-md-7">
 	{{ Form::select('age', ['Under 18', '19 to 30', 'Over 30'],null, ['class' => 'form-control']) }}
@@ -101,8 +110,8 @@
 	
 	
 	<div class="row">
-	<div class="col-md-3">
-	@label("Gender:")
+	<div class="col-md-3 col-md-offset-1">
+	@label("gender:")
 	</div>
 	<div class="col-md-7">
 	male
@@ -114,8 +123,8 @@
 	<br>
 	
 	<div class="row">
-	<div class="col-md-3">
-	@label("Activities:")
+	<div class="col-md-3 col-md-offset-1">
+	@label("activities:")
 	</div>
 	<div class="col-md-7">
 	programmer
@@ -125,6 +134,14 @@
 	</div>
 	</div>
 	<br>
+	
+	<div class="row">
+	<div class="col-md-3 col-md-offset-4">
+	{{Form::submit('Add user!',['class'=>'form-control btn-primary'])}}
+	</div>
+	</div>
+	<br>
+	
 	
 	{{Form::close()}}
 	</div>
