@@ -25,21 +25,23 @@ class UserController extends Controller
         if ($validation->fails()) {
             return Redirect::to('user.add')->withErrors($validation);
         } else {
-		
+			
+			
+		$imageName = time().'.'.$request->photo->getClientOriginalExtension();
+				$request->photo->move(public_path('images'), $imageName);
 		$user = \App\User::create(
                              array(
 									'name'=>Input::get('name'),
 									'email'=>Input::get('email'),
 									'adress'=>Input::get('adress'),
-									'photo'=>$request->photo,
+									'photo'=>$imageName,
 									'age'=>Input::get('age'),
 									'gender'=>(Input::get('gender')=="male"?"M":"F"),
 									'programmer'=>(Input::get('programmer')=='programmer'?true:false),
 									'designer'=>(Input::get('designer')=='designer'?true:false),				
                 ));
 				$user->save(); 
-				$imageName = time().'.'.$request->photo->getClientOriginalExtension();
-				$request->photo->move(public_path('images'), $imageName);
+				
 
 			return back()
     		->with('success','Image Uploaded successfully.')
