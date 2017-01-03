@@ -8,7 +8,7 @@ class User extends Model
 {
      protected $fillable = [
         'name',
-        'email'
+        'email',
         'adress',
         'photo',
 		'gender',
@@ -17,6 +17,6 @@ class User extends Model
 		'designer'
     ];
     protected $hidden = [
-         'remember_token',
+         'remember_token'
     ];
 }

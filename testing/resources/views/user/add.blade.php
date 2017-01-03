@@ -47,8 +47,14 @@
     </head>
     <body>
 	<div class="col-sm-8 col-sm-offset-1 w3-container w3-red">
-	{{Form::open(array('route' => 'post_user'))}}
-	{{ Form::token()}}
+	<?php $messages = $errors->all('<p style="color:yellow">:message</p>');
+	?>
+	@foreach($messages as $m)
+	{!!$m!!}
+	@endforeach
+	
+{!!Form::open(['url' => 'add_user', 'enctype'=>"multipart/form-data", 'method' => 'post'])!!}	
+	 {{ csrf_field() }}
 	<div class="row">
 	<div class="col-md-7 col-md-offset-4">
 	<h3>{{$msg}}</h3>
