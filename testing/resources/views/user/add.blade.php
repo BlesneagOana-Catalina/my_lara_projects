@@ -46,6 +46,11 @@
         <title>User Add Form</title>
     </head>
     <body>
+	<p style="font-color: red;">
+	{{$success}}
+	<br>
+	{{$path}}
+	</p>
 	<div class="col-sm-8 col-sm-offset-1 w3-container w3-red">
 	<?php $messages = $errors->all('<p style="color:yellow">:message</p>');
 	?>

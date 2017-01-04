@@ -7,12 +7,13 @@ use App\Http\Requests\AddUserRequest;
 use Validator;
 use Redirect;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
      protected function getAdd_user()
 	 {
-		 $data=array("msg"=>"This form is a User Add example");
+		 $data=array("msg"=>"This form is a User Add example",'success'=>'','path'=>'');
 		 return view('user.add')->with($data);
 	 }
 	 protected function postAdd_user(AddUserRequest $request){
@@ -43,11 +44,16 @@ class UserController extends Controller
 				$user->save(); 
 				
 
-			return back()
-    		->with('success','Image Uploaded successfully.')
-    		->with('path',$imageName);
+			$data=array("msg"=>"This form is a User Add example",'success'=>'Image Uploaded successfully.','path'=>$imageName);
+			return view('user.add')->with($data);
+    		
              
 	 }
+	 }
+	  protected function getAdministrate_user()
+	 {
+		 $data=array("users"=> DB::table('users')->get());
+		 return view('user.show')->with($data);
 	 }
 		 
 }

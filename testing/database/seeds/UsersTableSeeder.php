@@ -38,7 +38,7 @@ class UsersTableSeeder extends Seeder
             'adress'=>str_random(100),
 			'photo'=>str_random(100),
 			'gender'=>'M',
-			'age'=>3,
+			'age'=>0,
 			'programmer'=>true,
 			'designer'=>false
         ]);
