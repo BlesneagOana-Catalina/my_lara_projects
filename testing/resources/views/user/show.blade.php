@@ -229,7 +229,28 @@ $(document).ready(function() {
 	<tr>      
 	  <td>{{ $user->name }}</td>
 	  <td>{{ $user->email }}</td>
-	  <td>{{ wordwrap(str_limit($user->adress,10), 10, "\t")}}</td>
+	  <td>
+	  <a class="btn btn-default" role="button" data-toggle="collapse" href="#collapseAddress{{$user->id}}" aria-expanded="false" aria-controls="collapseAddress{{$user->id}}">
+	 {{ wordwrap(str_limit($user->adress,10), 10, "\t")}}
+	 </a>
+<div class="collapse" id="collapseAddress{{$user->id}}">
+  <div class="well">
+    {{$user->adress}} 
+  </div>
+</div>
+<script type='text/javascript'>
+$( document ).ready(function() {
+   $('.collapse').collapse();
+});
+</script>
+
+	  
+	  
+	  
+	  
+	  
+	  </td>
+	  
 	  <td>
 	
 <a class="btn btn-default" role="button" data-toggle="collapse" href="#collapseExample{{$user->id}}" aria-expanded="false" aria-controls="collapseExample{{$user->id}}">
@@ -252,8 +273,33 @@ $( document ).ready(function() {
 	  <td>{{ $age[$user->age] }}</td>
 	  <td>{{ $yes_no[$user->programmer] }}</td>
 	  <td>{{ $yes_no[$user->designer]}}</td>
-	  <td>M</td>
-	  <td>D</td>
+	  <td>
+	  <a href='update_user'  style="color: green; font-weight:bold;">Modify</a>
+	  </td>
+	  <td>
+	  <!-- Button HTML (to Trigger Modal) -->
+	  <a href="#myModal{{$user->id}}" style="color: red; font-weight:bold;" role="button" class="btn btn-large btn-default" data-toggle="modal">Delete</a>
+	  <!-- Modal HTML -->
+<div id="myModal{{$user->id}}" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to delete user {{$user->name}}?</p>
+                <p class="text-warning"><small>The user will be permanently deleted.</small></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Delete</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+	  
+	  </td>
 	</tr>   
    @endforeach
 
