@@ -52,7 +52,10 @@ class UserController extends Controller
 	 }
 	  protected function getAdministrate_user()
 	 {
-		 $data=array("users"=> DB::table('users')->get());
+		 $yes_no=array(0=>'no',1=>'yes');
+		 $gender=array('M'=>'Male','F'=>'Female');
+		 $age=array(0=>"Under 18 years old",1=>"Between 19 and 30 years old",2=>"Above 30 years old");
+		 $data=array("users"=> DB::table('users')->get(),"yes_no"=>$yes_no,"age"=>$age,'gender'=>$gender);
 		 return view('user.show')->with($data);
 	 }
 		 

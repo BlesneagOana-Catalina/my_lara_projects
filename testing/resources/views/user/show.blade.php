@@ -4,7 +4,11 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+		
+		<!--JQUERY-THE FIRST LIBRARY!!!-->
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<!--JQUERY-->
+		
 		<!--BOOTSTRAP-->
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -39,6 +43,9 @@
 		<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 		<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 		<!--BOOTSTRAP DATA TABLES-->
+		
+		
+		
 		<script type="text/javascript">
 		(function( factory ){
     if ( typeof define === 'function' && define.amd ) {
@@ -198,8 +205,9 @@ $(document).ready(function() {
         <title>User Table</title>
     </head>
     <body>	
+
+
 	<div class="col-sm-8 col-sm-offset-1">
-	
 	<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
   
    <thead>
@@ -222,11 +230,28 @@ $(document).ready(function() {
 	  <td>{{ $user->name }}</td>
 	  <td>{{ $user->email }}</td>
 	  <td>{{ wordwrap(str_limit($user->adress,10), 10, "\t")}}</td>
-	  <td>{{ $user->photo }}</td>
-	  <td>{{ $user->gender }}</td>
-	  <td>{{ $user->age }}</td>
-	  <td>{{ $user->programmer }}</td>
-	  <td>{{ $user->designer}}</td>
+	  <td>
+	
+<a class="btn btn-default" role="button" data-toggle="collapse" href="#collapseExample{{$user->id}}" aria-expanded="false" aria-controls="collapseExample{{$user->id}}">
+  <img src="{{asset('images/'.$user->photo)}}" alt="image" class='img-circle' style="width: 2.0vw;height: 2.0vw;"> 
+</a>
+<div class="collapse" id="collapseExample{{$user->id}}">
+  <div class="well">
+    <img src="{{asset('images/'.$user->photo)}}" alt="image" class='img-circle' style="width: 7.0vw;height: 7.0vw;"> 
+  </div>
+</div>
+<script type='text/javascript'>
+$( document ).ready(function() {
+   $('.collapse').collapse();
+});
+</script>
+
+
+	 </td>
+	  <td>{{ $gender[$user->gender]}}</td>
+	  <td>{{ $age[$user->age] }}</td>
+	  <td>{{ $yes_no[$user->programmer] }}</td>
+	  <td>{{ $yes_no[$user->designer]}}</td>
 	  <td>M</td>
 	  <td>D</td>
 	</tr>   
@@ -235,7 +260,6 @@ $(document).ready(function() {
    </tbody>
    
 </table>
-
 	</div>
 	</body>
 </html>
