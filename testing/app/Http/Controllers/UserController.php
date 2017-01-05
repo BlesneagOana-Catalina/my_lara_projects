@@ -58,5 +58,23 @@ class UserController extends Controller
 		 $data=array("users"=> DB::table('users')->get(),"yes_no"=>$yes_no,"age"=>$age,'gender'=>$gender);
 		 return view('user.show')->with($data);
 	 }
+	   protected function postDelete_user(){
+		 
+		 $cond=array('id'=>Input::get('user'));
+		 $files=DB::table('users')->where($cond)->get();
+		 foreach($files as $file){ 
+		 unlink ( public_path('images').'/'.$file->photo );
+		 }
+		 
+		 $conditions=array('id'=>Input::get('user'));
+		 DB::table('users')->where($conditions)->delete();
+		     
+		 $yes_no=array(0=>'no',1=>'yes');
+		 $gender=array('M'=>'Male','F'=>'Female');
+		 $age=array(0=>"Under 18 years old",1=>"Between 19 and 30 years old",2=>"Above 30 years old");
+		 $data=array("users"=> DB::table('users')->get(),"yes_no"=>$yes_no,"age"=>$age,'gender'=>$gender);
+		 return view('user.show')->with($data);
+	   
+	   }
 		 
 }

@@ -288,13 +288,22 @@ $( document ).ready(function() {
                 <h4 class="modal-title">Confirmation</h4>
             </div>
             <div class="modal-body">
+			
+		{!!Form::open(['url' => 'delete_user', 'method' => 'post'])!!}	
+		 {{ csrf_field() }}
                 <p>Do you want to delete user {{$user->name}}?</p>
                 <p class="text-warning"><small>The user will be permanently deleted.</small></p>
-            </div>
+			<input type="hidden" name="user" value='{{$user->id}}'>           
+		   </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Delete</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<div class="col-md-2">
+                {{Form::submit('Delete',['class'=>'form-control btn-primary'])}}
+			</div>
+			<div class="col-md-1">			
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
+			</div>
+		{{Form::close()}}
         </div>
     </div>
 </div>
