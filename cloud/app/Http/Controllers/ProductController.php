@@ -41,19 +41,20 @@ class ProductController extends Controller
 	 Storage::put('file.json',  json_encode($vals));
 	  return "success";
 	}
-	public function getProducts()
-    {
-		$contents=null;
-	$exists = Storage::exists('file.json');
+	
+	protected function changeName(Request $r){
+	 $exists = Storage::exists('file.json');
 	if($exists)
 	{
-	$contents = collect(json_decode(Storage::get('file.json')));
+	 $name=$r->pk;
+	 $contents = collect(json_decode(Storage::get('file.json')));
+	 //$vals=$contents->push(Input::all());	
+	 $selected=$contents->where("name",$name)->first();
+	 $selected->product_name=Input::get();	
+	  Storage::put('file.json',  json_encode($contents));
+	  return "success";
 	}
-	else{
-	$contents=null;	
 	}
-
-   return Datatables::of($contents)->make(true);
-    }
+	
 	
  }

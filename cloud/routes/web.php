@@ -14,3 +14,4 @@
 Route::get('/', "ProductController@addProduct");
 Route::post('/', "ProductController@showProducts")->name('post_product');
 Route::get('get_products', "ProductController@getProducts")->name('get_products');
+Route::post('modify_name', "ProductController@changeName")->name('modify_name');

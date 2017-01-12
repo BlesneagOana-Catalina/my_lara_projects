@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1c6619f449d243f65ea3359cc8db804e",
+    "content-hash": "f3bb14d64f97b54cde6d93728842fce2",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1875,6 +1875,55 @@
             "time": "2016-12-08T14:58:14+00:00"
         },
         {
+            "name": "vitalets/x-editable",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tubssp/x-editable.git",
+                "reference": "56b749e6b0e0175be24328008fb9e6d8111b6baa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tubssp/x-editable/zipball/56b749e6b0e0175be24328008fb9e6d8111b6baa",
+                "reference": "56b749e6b0e0175be24328008fb9e6d8111b6baa",
+                "shasum": ""
+            },
+            "require-dev": {
+                "grunt": "~0.3.11",
+                "grunt-contrib": "0.1.1"
+            },
+            "type": "library",
+            "extra": {
+                "component": {
+                    "name": "x-editable",
+                    "files": [
+                        "dist/**"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vitaliy Potapov",
+                    "email": "noginsk@rambler.ru",
+                    "homepage": "https://github.com/vitalets",
+                    "role": "Developer"
+                }
+            ],
+            "description": "In-place editing with Twitter Bootstrap, jQuery UI or pure jQuery.",
+            "homepage": "http://github.com/vitalets/x-editable",
+            "keywords": [
+                "bootstrap",
+                "editable",
+                "table",
+                "x-editable"
+            ],
+            "time": "2014-06-24 06:20:18"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v2.4.0",
             "source": {
@@ -3504,7 +3553,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "vitalets/x-editable": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

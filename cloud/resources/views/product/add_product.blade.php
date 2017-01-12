@@ -233,6 +233,104 @@ $(document).ready(function() {
 		
 		
 		
+<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jqueryui-editable/css/jqueryui-editable.css" rel="stylesheet"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jqueryui-editable/js/jqueryui-editable.min.js"></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jquery-editable/css/jquery-editable.css" rel="stylesheet"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jquery-editable/js/jquery-editable-poshytip.min.js"></script>		
+ <script src="assets/jquery/jquery-1.9.1.min.js"></script>  
+        <script src="assets/mockjax/jquery.mockjax.js"></script>
+        
+        <!-- momentjs --> 
+        <script src="assets/momentjs/moment.min.js"></script> 
+        
+        <!-- select2 --> 
+        <link href="assets/select2/select2.css" rel="stylesheet">
+        <script src="assets/select2/select2.js"></script>         
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]--> 
+        
+         
+        <!-- bootstrap 3 -->
+        <link href="assets/bootstrap300/css/bootstrap.css" rel="stylesheet">
+        <script src="assets/bootstrap300/js/bootstrap.js"></script>
+
+        <!-- bootstrap-datetimepicker -->
+        <link href="assets/bootstrap-datetimepicker/css/datetimepicker.css" rel="stylesheet">
+        <script src="assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>        
+        
+        <!-- x-editable (bootstrap 3) -->
+        <link href="assets/x-editable/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
+        <script src="assets/x-editable/bootstrap3-editable/js/bootstrap-editable.js"></script>
+
+        <!-- select2 bootstrap -->
+        <link href="assets/select2/select2-bootstrap.css" rel="stylesheet">
+       
+        <!-- typeaheadjs -->
+        <link href="assets/x-editable/inputs-ext/typeaheadjs/lib/typeahead.js-bootstrap.css" rel="stylesheet">
+        <script src="assets/x-editable/inputs-ext/typeaheadjs/lib/typeahead.js"></script>         
+        <script src="assets/x-editable/inputs-ext/typeaheadjs/typeaheadjs.js"></script>         
+        
+        <!-- wysihtml5 -->
+        <link href="assets/x-editable/inputs-ext/wysihtml5/bootstrap-wysihtml5-0.0.3/bootstrap-wysihtml5-0.0.3.css" rel="stylesheet">  
+        <script src="assets/x-editable/inputs-ext/wysihtml5/bootstrap-wysihtml5-0.0.3/wysihtml5-0.3.0.min.js"></script>  
+        <script src="assets/x-editable/inputs-ext/wysihtml5/bootstrap-wysihtml5-0.0.3/bootstrap-wysihtml5-0.0.3.min.js"></script>
+        <script src="assets/x-editable/inputs-ext/wysihtml5/wysihtml5-0.0.3.js"></script>
+        
+        <link href="assets/demo-bs3.css" rel="stylesheet">
+        
+        <style type="text/css">       
+            #comments:hover {
+                background-color: #FFFFC0;
+                cursor: text; 
+            }
+        </style>
+        
+        <script>
+        var f = 'bootstrap3';
+        </script>
+
+        
+        <!-- address input -->
+        <link href="assets/x-editable/inputs-ext/address/address.css" rel="stylesheet">
+        <script src="assets/x-editable/inputs-ext/address/address.js"></script> 
+        
+        <script>
+            var c = 'inline';
+            $.fn.editable.defaults.mode = 'inline';
+
+            $(function(){
+                $('#f').val(f);
+                $('#c').val(c);
+                
+                $('#frm').submit(function(){
+                var f = $('#f').val(); 
+                 $(this).attr('action', 'demo-bs3.html');                        
+                    
+                });
+            });
+        </script>        
+                
+        <style type="text/css">
+            body {
+                padding-top: 50px;
+                padding-bottom: 30px;
+            }
+            
+            table.table > tbody > tr > td {
+                height: 30px;
+                vertical-align: middle;
+            }
+        </style>         
+		
+		
+		
+		
+		
 		
 		
 		
@@ -373,38 +471,22 @@ $(document).ready(function() {
   
     @foreach ($contents as $content)
 	<tr>
-	<td>
-	  <!-- Button HTML (to Trigger Modal) -->
-	  <a href="#myModalName{{$content->product_name}}" style="color: red; font-weight:bold;" role="button" class="btn btn-large btn-default" data-toggle="modal">{{$content->product_name}}</a>
-	  <!-- Modal HTML -->
-<div id="myModalName{{$content->product_name}}" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-            <div class="modal-body">
-			
-		{!!Form::open(['url' => 'update_name', 'method' => 'post'])!!}	
-		 {{ csrf_field() }}
-			{{ Form::input('text', 'product_name', $content->product_name, ['class' => 'form-control','id'=>'product_name']) }}
-			<input type="hidden" name="name" value='{{$content->product_name}}'>           
-		   </div>
-            <div class="modal-footer">
-			<div class="col-md-2">
-                {{Form::submit('Update',['class'=>'form-control btn-primary'])}}
-			</div>
-			<div class="col-md-1">			
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-			</div>
-		{{Form::close()}}
-        </div>
-    </div>
-</div>
-	  
-	  </td>
-	  
+	 <td width="25%">	 
+	 <a href="#" id="productname{{ $content->product_name }}" data-type="text" data-pk="1" data-title="Enter product name">{{ $content->product_name }}</a>
+	 <script type="text/javascript">
+	 $('#productname{{ $content->product_name }}').editable({
+                           type:  'text',
+                           pk:    '{{$content->product_name}}',
+                           name:  'productname{{ $content->product_name }}',
+						   url:   '{{route("modify_name")}}',  
+                           title: 'Enter product name'
+                        });
+						
+						
+						
+						
+	 </script>
+	 </td>  
 	  <td>{{ $content->quantity_in_stock }}</td>
 	  <td>{{ $content->product_price }}</td>
 	  <td> 
@@ -418,6 +500,14 @@ $(document).ready(function() {
 	<div style="font-weight: bold;">
 	Total:{{$total}}
 	</div>
+	
+	<div style="float: left; width: 50%">
+                <h3>Console <small>(all ajax requests here are emulated)</small></h3> 
+                <div><textarea id="console" class="form-control" rows="8" style="width: 70%" autocomplete="off"></textarea></div>
+            </div>
 	</div>
+	 
+
+	
 	</body>
 </html>
