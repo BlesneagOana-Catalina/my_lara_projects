@@ -13,3 +13,4 @@
 
 Route::get('/', "ProductController@addProduct");
 Route::post('/', "ProductController@showProducts")->name('post_product');
+Route::get('get_products', "ProductController@getProducts")->name('get_products');

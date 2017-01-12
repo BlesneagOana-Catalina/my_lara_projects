@@ -16,10 +16,15 @@ class ProductController extends Controller
 	if($exists)
 	{
 	$contents = collect(json_decode(Storage::get('file.json')));
-	$data=array("contents"=>$contents);
+	$total=0;
+	foreach($contents as $content)
+	{
+		$total+=($content->product_price)*( $content->quantity_in_stock );
+	}
+	$data=array("total"=>$total,"contents"=>$contents->sortBy("product_name"));
     return view('product/add_product')->with($data);
 	}else{
-		$data=array("contents"=>collect(null));
+		$data=array("total"=>null,"contents"=>collect(null));
 		return view('product/add_product',$data);
 	}
 	}
@@ -36,4 +41,19 @@ class ProductController extends Controller
 	 Storage::put('file.json',  json_encode($vals));
 	  return "success";
 	}
+	public function getProducts()
+    {
+		$contents=null;
+	$exists = Storage::exists('file.json');
+	if($exists)
+	{
+	$contents = collect(json_decode(Storage::get('file.json')));
+	}
+	else{
+	$contents=null;	
+	}
+
+   return Datatables::of($contents)->make(true);
+    }
+	
  }

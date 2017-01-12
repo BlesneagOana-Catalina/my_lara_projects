@@ -49,8 +49,26 @@
 		<script src="https://cdn.datatables.net/1.10.13/js/dataTables.jqueryui.min.js"></script>
 		<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 		<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+		
+		
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css">
+		<link rel="stylesheet" href="../../extensions/Editor/css/editor.dataTables.min.css">
+		
+		
+		
+	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
+	<script src="https://cdn.datatables.net/select/1.2.1/js/dataTables.select.min.js"></script>
+	<script src="../../extensions/Editor/js/dataTables.editor.min.js"></script>
+	
+		
+		
 		<!--BOOTSTRAP DATA TABLES-->
 		
+	
 		
 		
 		<script type="text/javascript">
@@ -285,12 +303,12 @@ $(document).ready(function() {
 	$(document).ready(function() {
 
     $('#add').click(function () {
-	window.alert("click");
+	window.alert("Wait...");
    var product_name = $('#product_name').val();
    var quantity_in_stock = $('#quantity_in_stock').val();
    var product_price = $('#product_price').val();
    var date = $('#date').val();
-   alert(product_name);
+  
            
    $.ajax({
          type: "POST",
@@ -305,12 +323,10 @@ $(document).ready(function() {
 			product_price: product_price,
 			date: date
          },
-         success: function(response){
-		 location.reload();     
-		 },
-		 error: function(xhr){
+ 		 error: function(xhr){
 		var info='Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText;
-        $('#error').html(info);
+       // $('#error').html(info);
+	   location.reload();
 			}
          });
 	return false;
@@ -356,8 +372,39 @@ $(document).ready(function() {
    
   
     @foreach ($contents as $content)
-	<tr>      
-	  <td>{{ $content->product_name }}</td>
+	<tr>
+	<td>
+	  <!-- Button HTML (to Trigger Modal) -->
+	  <a href="#myModalName{{$content->product_name}}" style="color: red; font-weight:bold;" role="button" class="btn btn-large btn-default" data-toggle="modal">{{$content->product_name}}</a>
+	  <!-- Modal HTML -->
+<div id="myModalName{{$content->product_name}}" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+			
+		{!!Form::open(['url' => 'update_name', 'method' => 'post'])!!}	
+		 {{ csrf_field() }}
+			{{ Form::input('text', 'product_name', $content->product_name, ['class' => 'form-control','id'=>'product_name']) }}
+			<input type="hidden" name="name" value='{{$content->product_name}}'>           
+		   </div>
+            <div class="modal-footer">
+			<div class="col-md-2">
+                {{Form::submit('Update',['class'=>'form-control btn-primary'])}}
+			</div>
+			<div class="col-md-1">			
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+			</div>
+		{{Form::close()}}
+        </div>
+    </div>
+</div>
+	  
+	  </td>
+	  
 	  <td>{{ $content->quantity_in_stock }}</td>
 	  <td>{{ $content->product_price }}</td>
 	  <td> 
@@ -366,14 +413,11 @@ $(document).ready(function() {
 	  <td>{{ ($content->product_price)*( $content->quantity_in_stock )}}</td>
 	</tr>   
    @endforeach
-   
-
    </tbody>
-   
 	</table>
-	Total:
+	<div style="font-weight: bold;">
+	Total:{{$total}}
 	</div>
-	
-	
+	</div>
 	</body>
 </html>
