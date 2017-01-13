@@ -302,7 +302,14 @@ $(document).ready(function() {
         <script>
             var c = 'inline';
             $.fn.editable.defaults.mode = 'inline';
-
+			$.fn.editable.defaults.params = function (params) {
+			params._token = $('meta[name="csrf-token"]').attr('content');
+			return params;
+			};
+			$.fn.editable.defaults.success = function(data) { window.alert(data); }
+			$.fn.editable.defaults.error = function(xhr) {
+	var info='Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText;	
+	$("#error").html(info); }
             $(function(){
                 $('#f').val(f);
                 $('#c').val(c);
@@ -472,19 +479,23 @@ $(document).ready(function() {
     @foreach ($contents as $content)
 	<tr>
 	 <td width="25%">	 
-	 <a href="#" id="productname{{ $content->product_name }}" data-type="text" data-pk="1" data-title="Enter product name">{{ $content->product_name }}</a>
+	 <a href="#" id="productname{{ $content->product_name }}" data-value=''>{{ $content->product_name }}</a>
 	 <script type="text/javascript">
 	 $('#productname{{ $content->product_name }}').editable({
                            type:  'text',
                            pk:    '{{$content->product_name}}',
                            name:  'productname{{ $content->product_name }}',
 						   url:   '{{route("modify_name")}}',  
-                           title: 'Enter product name'
-                        });
+                           title: 'Enter product name',
+						    ajaxOptions: {
+							type: 'post'
+							}   
+						   
+	  });
 						
 						
 						
-						
+//	$('#save-btn').click();					
 	 </script>
 	 </td>  
 	  <td>{{ $content->quantity_in_stock }}</td>
