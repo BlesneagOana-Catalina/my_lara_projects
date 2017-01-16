@@ -42,26 +42,25 @@ class ProductController extends Controller
 	  return "success";
 	}
 	
-	protected function changeName(){
+	protected function changeName(Request $request){
 	 $exists = Storage::exists('file.json');
 	if($exists)
 	{
 	 
 	  $contents = collect(json_decode(Storage::get('file.json')));
-	  $old_value="";
-	  $new_value="";
-	  $name=Input::get("pk");
-	  $value=Input::get("productname".$name);
-	  foreach($contents as $content)
-	  {
-		  if(!is_null(Input::get("productname{{ $content->product_name }}")))
-		  {
-			  $old_value=$content->product_name;
-			  $new_value=Input::get("productname{{ $content->product_name }}");
+	 $datele=null;
+	  
+	  if ($request->format() == 'json'){
+			
+		}
+		else{
+			$name=$request->get("pk");
+			$value=$request->get("value");
+			
+		}
 		  
-		  }
-	  }
-	
+		
+	  
 	 //$vals=$contents->push(Input::all());	
 	 $selected=$contents->where("product_name",$name)->all();
 	 foreach($selected as $select)
