@@ -6,6 +6,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Angular JS custom directive</title>
+		
+		<!--JQUERY-THE FIRST LIBRARY!!!-->
+		<script
+  src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+  integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
+  crossorigin="anonymous"></script>
+  
+  <script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous"></script>
+		
+		<!--JQUERY-->
+		
 		<!--BOOTSTRAP-->
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -23,18 +37,24 @@
 		app.controller("firstCtrl", function($scope,$rootScope){
 		$scope.cities=["London","New York","Paris"];
 		$scope.city="London";
-		$scope.the_other_city="";
+		$scope.the_other_city='aa';
 		
 		
-		$scope.$on("transmit",function(event, args){
-			the_other_city = args.city;
+		$scope.$on('transmit2',function(event, args){
+		alert(args.city);
+		$scope.the_other_city= args.city;
+		
 			});
 			
 		$scope.setOtherCity = function(city){
-		$rootScope.$broadcast("transmit",{city: city});
+			alert("bb");
+		$rootScope.$broadcast('transmit1',{'city':city});
 		}
 		
-		
+		$scope.$watch('city', function (newValue, oldValue, scope) {
+			alert("aa");
+			scope.setOtherCity(newValue);
+		});
 		
 		$scope.getCountry = function(city){
 			switch(city){
@@ -48,16 +68,24 @@
 		app.controller("secondCtrl", function($scope, $rootScope){
 		$scope.cities=["London","New York","Paris"];
 		$scope.city="London";
-		$scope.the_other_city="";
+		$scope.the_other_city="aa";
 		
 		
-		$scope.$on("transmit",function(event, args){
-			the_other_city = args.city;
+		$scope.$on('transmit1',function(event, args){
+			alert(args.city);
+			$scope.the_other_city= args.city;
 			});
 			
 		$scope.setOtherCity = function(city){
-		$rootScope.$broadcast("transmit",{city: city});
+		alert("bb");
+		$rootScope.$broadcast('transmit2', {'city':city});
 		}
+		
+		$scope.$watch('city', function (newValue, oldValue, scope) {
+			alert("aa");
+			scope.setOtherCity(newValue);
+			
+		});
 		
 		$scope.getCountry = function(city){
 			switch(city){
