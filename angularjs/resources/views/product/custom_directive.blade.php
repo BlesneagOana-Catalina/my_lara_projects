@@ -34,11 +34,31 @@
 		<!--AngularJS--->   
 		<script>
 		var app=angular.module("myApp",[]);
-		app.controller("firstCtrl", function($scope,$rootScope){
+		app.constant("getUrl","{{url('')}}}");
+		app.constant("postUrl","{{url('')}}");
+		app.controller("firstCtrl", function($scope,$rootScope, $http, getUrl, postUrl){
 		$scope.cities=["London","New York","Paris"];
 		$scope.city="London";
 		$scope.the_other_city='aa';
 		
+		 $scope.getCities = function(id, number){
+                      var parameter = JSON.stringify({'id':id,'number':number});
+                      $http.post('{{route('post_data')}}', parameter)
+                      .success(function(data, status, headers, config) {     
+                      
+						$scope.cities=data;			  
+				
+ 
+
+								  
+					  
+					  })
+                      .error(function(data, status, headers, config) {
+                      alert("eroare");
+                      alert(data);    
+                      $('#error').html(data);                 
+                      });
+                  };		
 		
 		$scope.$on('transmit2',function(event, args){
 		alert(args.city);
@@ -65,10 +85,24 @@
 			}
 		}
 		});
-		app.controller("secondCtrl", function($scope, $rootScope){
+		app.controller("secondCtrl", function($scope, $rootScope, $http, getUrl, postUrl){
 		$scope.cities=["London","New York","Paris"];
 		$scope.city="London";
 		$scope.the_other_city="aa";
+		
+		$scope.getCities = function(id, number){
+                      var parameter = JSON.stringify({'id':id,'number':number});
+                      $http.post('{{route('post_data')}}', parameter)
+                      .success(function(data, status, headers, config) {     
+                      $scope.cities=data;
+                      })
+                      .error(function(data, status, headers, config) {
+                      alert("eroare");
+                      alert(data);    
+                      $('#error').html(data);                 
+                      });
+                  };		
+		
 		
 		
 		$scope.$on('transmit1',function(event, args){
@@ -100,12 +134,12 @@
   </head>
     <body >
 	<div ng-controller="firstCtrl">
-       <div class="well">
+	   <div class="well">
+	    <button ng-click="getCities(1,2)">Lodad other cities</button>
+	   <div id="error"></div>
 	   <label>Select a City :</label>
 	   <select ng-options="city for city in cities" ng-model="city"> 
 	   </select>
-	   </div>
-	   <div class="well">
 	   <p>The city is: @{{city}}</p>
 	   <p>The country is @{{getCountry(city)||"Unknown"}}</p>
 	   <p>The other city is: @{{the_other_city}}</p>
@@ -115,12 +149,13 @@
 	   
 	   
 	   <div ng-controller="secondCtrl">
+	    
        <div class="well">
+	   <button ng-click="getCities(1,2)">Lodad other cities</button>
+	   <div id="error"></div>
 	   <label>Select a City :</label>
 	   <select ng-options="city for city in cities" ng-model="city"> 
 	   </select>
-	   </div>
-	   <div class="well">
 	   <p>The city is: @{{city}}</p>
 	   <p>The country is @{{getCountry(city)||"Unknown"}}</p>
 	   <p>The other city is: @{{the_other_city}}</p>
